@@ -1,8 +1,10 @@
-﻿namespace GitHub_Activity_CLI;
+﻿using GitHub_Activity_CLI.services;
+
+namespace GitHub_Activity_CLI;
 
 public static class Program
 {
-    private static void Main()
+    private static async Task Main()
     {
         const string nameValidation = "\nPlease enter the username to fetch data.";
         const string helpMessage = "Use \"help\" for more information.\n";
@@ -19,6 +21,10 @@ public static class Program
             if (userInput == "help")
             {
                 PrintHelp();
+            }
+            if(!string.IsNullOrEmpty(userInput))
+            {
+                await FetchActivity.Fetch(userInput);
             }
         } while(userInput != "exit");
     }
